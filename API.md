@@ -110,6 +110,132 @@ without requiring a separate `activity_summaries` payload.
 | `apple_exercise_time` | `active_minutes` |
 | `apple_stand_time` | `stand_hours` |
 
+### Blood Pressure Correlation
+
+When the iOS app sends `"metric": "blood_pressure"`, individual samples may
+carry an inner `"metric"` field with the sub-type:
+
+- `blood_pressure_systolic`
+- `blood_pressure_diastolic`
+
+The server preserves the inner metric name when storing to `quantity_samples`.
+
+### ECG
+
+`ecg` batches are accepted and stored in `quantity_samples`.
+
+### Full HealthKit Metric Catalog
+
+The server accepts any metric name. Below is the complete catalog of metrics
+that HealthSave can send. Metrics not listed above as dedicated or daily
+activity types are stored in `quantity_samples`.
+
+**Heart & Cardiovascular:**
+`heart_rate`, `resting_heart_rate`, `walking_heart_rate_average`,
+`heart_rate_variability`, `heart_rate_recovery`,
+`atrial_fibrillation_burden`, `vo2_max`, `oxygen_saturation`,
+`respiratory_rate`, `peripheral_perfusion_index`
+
+**Blood Pressure & Metabolic:**
+`blood_pressure`, `blood_pressure_systolic`, `blood_pressure_diastolic`,
+`blood_glucose`, `insulin_delivery`, `blood_alcohol_content`,
+`number_of_alcoholic_beverages`
+
+**Activity & Movement:**
+`step_count`, `distance_walking_running`, `distance_cycling`,
+`distance_swimming`, `distance_wheelchair`,
+`distance_downhill_snow_sports`, `distance_cross_country_skiing`,
+`distance_paddle_sports`, `distance_rowing`, `distance_skating_sports`,
+`flights_climbed`, `swimming_stroke_count`, `push_count`, `nike_fuel`,
+`apple_exercise_time`, `apple_stand_time`, `apple_move_time`,
+`active_energy_burned`, `basal_energy_burned`, `number_of_times_fallen`
+
+**Walking & Running Dynamics:**
+`walking_speed`, `walking_step_length`, `walking_asymmetry`,
+`walking_double_support`, `stair_ascent_speed`, `stair_descent_speed`,
+`apple_walking_steadiness`, `six_minute_walk_test_distance`,
+`running_power`, `running_speed`, `running_stride_length`,
+`running_vertical_oscillation`, `running_ground_contact_time`
+
+**Cycling (iOS 17+):**
+`cycling_speed`, `cycling_power`, `cycling_cadence`,
+`cycling_functional_threshold_power`
+
+**Sport-Specific Speeds (iOS 18+):**
+`cross_country_skiing_speed`, `paddle_sports_speed`, `rowing_speed`
+
+**Effort & Exertion:**
+`physical_effort`, `workout_effort_score`, `estimated_workout_effort_score`
+
+**Body & Vitals:**
+`body_temperature`, `wrist_temperature`, `basal_body_temperature`,
+`body_mass`, `body_fat_percentage`, `bmi`, `lean_body_mass`, `height`,
+`waist_circumference`, `electrodermal_activity`
+
+**Respiratory:**
+`forced_expiratory_volume_1`, `forced_vital_capacity`,
+`peak_expiratory_flow_rate`, `inhaler_usage`
+
+**Sleep:**
+`sleep_analysis`, `sleeping_breathing_disturbances`
+
+**Environment & Audio:**
+`environmental_audio_exposure`, `headphone_audio_exposure`,
+`environmental_sound_reduction`, `uv_exposure`, `time_in_daylight`
+
+**Water & Diving:**
+`underwater_depth`, `water_temperature`
+
+**Nutrition (38 types):**
+`dietary_energy_consumed`, `dietary_protein`, `dietary_fat_total`,
+`dietary_fat_saturated`, `dietary_fat_monounsaturated`,
+`dietary_fat_polyunsaturated`, `dietary_carbohydrates`, `dietary_sugar`,
+`dietary_fiber`, `dietary_cholesterol`, `dietary_sodium`,
+`dietary_potassium`, `dietary_calcium`, `dietary_iron`,
+`dietary_magnesium`, `dietary_phosphorus`, `dietary_zinc`,
+`dietary_manganese`, `dietary_copper`, `dietary_selenium`,
+`dietary_chromium`, `dietary_molybdenum`, `dietary_chloride`,
+`dietary_biotin`, `dietary_vitamin_a`, `dietary_vitamin_b6`,
+`dietary_vitamin_b12`, `dietary_vitamin_c`, `dietary_vitamin_d`,
+`dietary_vitamin_e`, `dietary_vitamin_k`, `dietary_folate`,
+`dietary_niacin`, `dietary_pantothenic_acid`, `dietary_riboflavin`,
+`dietary_thiamin`, `dietary_iodine`, `dietary_water`, `dietary_caffeine`
+
+**Structured Types:**
+`workouts`, `activity_summaries`, `ecg`
+
+**Category Events:**
+`high_heart_rate_event`, `low_heart_rate_event`,
+`irregular_heart_rhythm_event`, `low_cardio_fitness_event`,
+`mindful_session`, `handwashing_event`, `toothbrushing_event`,
+`environmental_audio_exposure_event`, `headphone_audio_exposure_event`,
+`apple_walking_steadiness_event`
+
+**Reproductive Health:**
+`menstrual_flow`, `intermenstrual_bleeding`, `ovulation_test_result`,
+`cervical_mucus_quality`, `sexual_activity`, `contraceptive`,
+`pregnancy`, `pregnancy_test_result`, `lactation`,
+`progesterone_test_result`, `infrequent_menstrual_cycles`,
+`irregular_menstrual_cycles`, `persistent_intermenstrual_bleeding`,
+`prolonged_menstrual_periods`, `bleeding_after_pregnancy`,
+`bleeding_during_pregnancy`
+
+**Symptoms:**
+`abdominal_cramps`, `acne`, `appetite_changes`,
+`generalized_body_ache`, `bloating`, `breast_pain`,
+`chest_tightness_or_pain`, `chills`, `constipation`, `coughing`,
+`diarrhea`, `dizziness`, `fainting`, `fatigue`, `fever`, `headache`,
+`heartburn`, `hot_flashes`, `lower_back_pain`, `loss_of_smell`,
+`loss_of_taste`, `mood_changes`, `nausea`, `pelvic_pain`,
+`rapid_pounding_or_fluttering_heartbeat`, `runny_nose`,
+`shortness_of_breath`, `sinus_congestion`, `skipped_heartbeat`,
+`sleep_changes`, `sore_throat`, `vomiting`, `wheezing`,
+`bladder_incontinence`, `dry_skin`, `hair_loss`, `vaginal_dryness`,
+`memory_lapse`, `night_sweats`
+
+**iOS 18+ Category Events:**
+`sleep_apnea_event`
+
 All other metric names are accepted and stored in `quantity_samples` with:
 
 ```json

@@ -428,6 +428,7 @@ async def _ingest_generic(
         v = s.get("qty")
         if t is None or v is None:
             continue
+        sample_metric = s.get("metric") if isinstance(s.get("metric"), str) else metric
         await session.execute(
             text("""
                 INSERT INTO quantity_samples (time, device_id, metric_name, value, unit, source_id)
@@ -438,7 +439,7 @@ async def _ingest_generic(
             {
                 "time": t,
                 "device_id": device_id,
-                "metric": metric,
+                "metric": sample_metric,
                 "value": float(v),
                 "unit": s.get("unit", ""),
                 "source": s.get("source", ""),
