@@ -25,7 +25,7 @@ from analysis.scheduler import AnalysisScheduler
 
 from .api import health_routes, ingest, insights, metrics, status
 from .db.session import async_session, engine
-from .ingestion.storage import PostgresIngestStorage
+from .ingestion.storage import PostgresAuditLog, PostgresIngestStorage
 
 log = logging.getLogger("healthsave")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
@@ -43,6 +43,7 @@ async def lifespan(a: FastAPI):
     a.state.analysis_engine = analysis_engine
     a.state.scheduler = scheduler
     a.state.storage = PostgresIngestStorage()
+    a.state.audit_log = PostgresAuditLog()
     scheduler.start()
     try:
         yield
