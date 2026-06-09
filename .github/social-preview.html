@@ -2,218 +2,100 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Health Data Hub - Social Preview</title>
+<title>HealthSave Observatory — Social Preview</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body {
-    width: 1280px;
-    height: 640px;
+    width: 1280px; height: 640px;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: #e6edf3;
-    background: #0d1117;
-    overflow: hidden;
+    background: #0a0d12; color: #f4f6fb; overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
+  .card { position: relative; width: 1280px; height: 640px; padding: 64px; display: flex; gap: 56px; }
 
-  .card {
-    width: 1280px;
-    height: 640px;
-    padding: 80px 96px;
-    background:
-      radial-gradient(ellipse at top right, rgba(253, 181, 21, 0.10) 0%, transparent 45%),
-      radial-gradient(ellipse at bottom left, rgba(0, 150, 136, 0.14) 0%, transparent 50%),
-      linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
+  /* subtle indigo radial glow behind the mark, ~10% */
+  .glow {
+    position: absolute; top: -120px; left: -120px; width: 620px; height: 620px;
+    background: radial-gradient(circle at center, rgba(110,123,255,0.12) 0%, transparent 60%);
     pointer-events: none;
   }
+  /* faint oversized diamond watermark behind the panel */
+  .watermark { position: absolute; right: -60px; bottom: -80px; width: 520px; height: 520px; opacity: 0.05; pointer-events: none; }
 
-  .card > * { position: relative; z-index: 1; }
+  .left { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .name { font-size: 34px; font-weight: 600; letter-spacing: -0.01em; color: #f4f6fb; }
 
-  .top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .headline { margin-top: auto; font-size: 64px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.04; color: #f4f6fb; }
+  .sub { margin-top: 26px; font-size: 23px; font-weight: 400; color: #9aa4b8; letter-spacing: -0.005em; }
+  .sub .sep { color: #6e7bff; padding: 0 4px; }
+
+  .foot { margin-top: auto; font-size: 15px; color: #6b7480; font-weight: 500; }
+  .foot .mono { color: #9aa4b8; }
+
+  /* right panel — a restrained Observatory UI fragment */
+  .panel {
+    position: relative; z-index: 2; width: 432px; align-self: center;
+    background: #10151f; border: 1px solid #20283a; border-radius: 16px; overflow: hidden;
   }
-
-  .slug {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    color: #8b949e;
-    letter-spacing: 0.01em;
-  }
-
-  .slug .user { color: #e6edf3; }
-  .slug .repo { color: #fdb515; font-weight: 600; }
-
-  .badges {
-    display: flex;
-    gap: 12px;
-  }
-
-  .badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: #8b949e;
-    padding: 6px 14px;
-    border: 1px solid #30363d;
-    border-radius: 999px;
-    background: rgba(22, 27, 34, 0.6);
-    backdrop-filter: blur(4px);
-  }
-
-  .badge.live::before {
-    content: "";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 8px;
-    border-radius: 50%;
-    background: #2ea043;
-    vertical-align: middle;
-    box-shadow: 0 0 8px #2ea043;
-  }
-
-  .middle {
-    margin-top: 40px;
-  }
-
-  .eyebrow {
-    font-size: 18px;
-    font-weight: 500;
-    color: #fdb515;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-bottom: 24px;
-  }
-
-  h1 {
-    font-size: 112px;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    color: #ffffff;
-  }
-
-  h1 .accent {
-    background: linear-gradient(90deg, #fdb515 0%, #f97316 60%, #ef4444 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .subtitle {
-    margin-top: 28px;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1.35;
-    color: #c9d1d9;
-    max-width: 920px;
-  }
-
-  .subtitle b { color: #ffffff; font-weight: 600; }
-
-  .stack {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .chip {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: rgba(22, 27, 34, 0.85);
-    border: 1px solid #30363d;
-    color: #e6edf3;
-    white-space: nowrap;
-  }
-
-  .chip .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-
-  .dot.apple       { background: #f5f5f7; }
-  .dot.timescale   { background: #fdb515; }
-  .dot.grafana     { background: #f46800; }
-  .dot.ollama      { background: #8b949e; }
-  .dot.fastapi     { background: #009688; }
-  .dot.docker      { background: #2496ed; }
-  .dot.home        { background: #41bdf5; }
-
-  .footer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .tagline {
-    font-size: 20px;
-    font-weight: 500;
-    color: #8b949e;
-    text-align: right;
-  }
-  .tagline b { color: #e6edf3; font-weight: 600; }
+  .sec { padding: 22px 24px; }
+  .sec + .sec { border-top: 1px solid #1b2230; }
+  .label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #7d889c; margin-bottom: 14px; }
+  .row { display: flex; align-items: baseline; justify-content: space-between; font-size: 18px; }
+  .row + .row { margin-top: 8px; }
+  .row .src { color: #9aa4b8; font-weight: 400; }
+  .row .val { color: #f4f6fb; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .chip { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 600;
+          color: #aab2ff; background: rgba(110,123,255,0.12); border: 1px solid rgba(110,123,255,0.3);
+          padding: 4px 10px; border-radius: 999px; letter-spacing: 0.01em; }
+  .finding { font-size: 20px; font-weight: 600; color: #f4f6fb; }
+  .finding .delta { color: #8f9bff; }
+  .meta { margin-top: 8px; font-size: 14px; color: #7d889c; }
+  .routes { font-size: 17px; font-weight: 500; color: #cdd4e1; }
+  .routes b { color: #f4f6fb; font-weight: 600; }
+  .self { position: absolute; top: 64px; right: 64px; z-index: 3; font-size: 13px; font-weight: 600;
+          color: #9aa4b8; border: 1px solid #20283a; border-radius: 999px; padding: 6px 14px; background: rgba(16,21,31,0.6); }
 </style>
 </head>
 <body>
   <div class="card">
+    <div class="glow"></div>
+    <svg class="watermark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3l11 13-11 13L5 16z" fill="#6e7bff"/></svg>
+    <div class="self">self-hosted</div>
 
-    <div class="top-row">
-      <div class="slug">
-        <span class="user">github.com/umutkeltek/</span><span class="repo">health-data-hub</span>
+    <div class="left">
+      <div class="brand">
+        <svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#11151c" stroke="#26304333"/>
+          <path d="M16 6.5l7 9.5-7 9.5-7-9.5z" fill="#6e7bff"/>
+        </svg>
+        <div class="name">HealthSave Observatory</div>
       </div>
-      <div class="badges">
-        <span class="badge live">Elastic License 2.0</span>
-        <span class="badge">Python 3.12</span>
-        <span class="badge">Docker-ready</span>
-      </div>
+
+      <div class="headline">Your whole body,<br/>in one place you own.</div>
+      <div class="sub">Source-tracked health data<span class="sep">·</span>Evidence-linked findings<span class="sep">·</span>Private API</div>
+
+      <div class="foot">Self-hosted · source-available · runs on <span class="mono">your</span> hardware</div>
     </div>
 
-    <div class="middle">
-      <div class="eyebrow">Self-hosted · Local-first · Private</div>
-      <h1>Health Data <span class="accent">Hub</span></h1>
-      <div class="subtitle">
-        Sync <b>Apple Health</b> from your iPhone and Apple Watch into <b>TimescaleDB</b>,
-        visualize in <b>Grafana</b>, and get AI-written daily briefings via a local <b>Ollama</b> model.
+    <div class="panel">
+      <div class="sec">
+        <div class="label">Sleep last night</div>
+        <div class="row"><span class="src">Apple Watch</span><span class="val">6h 42m</span></div>
+        <div class="row"><span class="src">Whoop</span><span class="val">7h 18m</span></div>
+        <div class="chip">conflict visible — both kept</div>
+      </div>
+      <div class="sec">
+        <div class="label">Finding</div>
+        <div class="finding">HRV <span class="delta">−12%</span> vs 30-day baseline</div>
+        <div class="meta">evidence · coverage 94% · what it can't conclude</div>
+      </div>
+      <div class="sec">
+        <div class="label">Routes</div>
+        <div class="routes"><b>Observatory</b> · <b>Body Brief</b> · Home Assistant · <b>Private API</b></div>
       </div>
     </div>
-
-    <div class="footer">
-      <div class="stack">
-        <span class="chip"><span class="dot apple"></span>Apple Health</span>
-        <span class="chip"><span class="dot timescale"></span>TimescaleDB</span>
-        <span class="chip"><span class="dot grafana"></span>Grafana</span>
-        <span class="chip"><span class="dot fastapi"></span>FastAPI</span>
-        <span class="chip"><span class="dot ollama"></span>Ollama</span>
-        <span class="chip"><span class="dot docker"></span>Docker</span>
-        <span class="chip"><span class="dot home"></span>Home Assistant</span>
-      </div>
-      <div class="tagline"><b>Your data.</b> Your hardware.</div>
-    </div>
-
   </div>
 </body>
 </html>
