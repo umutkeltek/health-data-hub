@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privacy &amp; Egress - HealthSave Observatory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0a0d12',
+                        surface: {
+                            DEFAULT: '#10151f',
+                            raised: '#151b27'
+                        },
+                        hairline: '#20283a',
+                        accent: {
+                            DEFAULT: '#6e7bff',
+                            glow: 'rgba(110, 123, 255, 0.12)'
+                        },
+                        text: {
+                            DEFAULT: '#f4f6fb',
+                            secondary: '#9aa4b8',
+                            muted: '#6b7480'
+                        },
+                        status: {
+                            good: '#4ade80',
+                            attention: '#fbbf24'
+                        }
+                    },
+                    fontFamily: {
+                        headline: ["Inter", "sans-serif"],
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Inter", "sans-serif"],
+                        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for a technical feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d12;
+            border-left: 1px solid #20283a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #151b27;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #20283a;
+        }
+        
+        /* Toggle Switch Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #6e7bff;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #6e7bff;
+        }
+        
+        /* Data grid specific */
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="bg-background text-text font-body antialiased selection:bg-accent/30 selection:text-text h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-hairline bg-surface flex flex-col py-6 z-20">
+<!-- Brand / Header -->
+<div class="px-6 mb-8 flex flex-col gap-1 relative">
+<div class="absolute -left-2 top-1 w-6 h-6 bg-accent/20 rounded-full blur-xl mix-blend-screen pointer-events-none"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent text-sm" style="font-variation-settings: 'FILL' 1;">diamond</span>
+<span class="text-lg font-headline font-bold text-text tracking-tight">HealthSave</span>
+</div>
+<span class="text-xs text-text-secondary tracking-widest uppercase font-semibold pl-6">Observatory</span>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<!-- Today -->
+<a class="text-text-secondary hover:text-text hover:bg-surface-raised px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer active:opacity-80 rounded-md" href="#">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span class="text-sm font-medium">Today</span>
+</a>
+<!-- Findings -->
+<a class="text-text-secondary hover:text-text hover:bg-surface-raised px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer active:opacity-80 rounded-md" href="#">
+<span class="material-symbols-outlined text-xl">insights</span>
+<span class="text-sm font-medium">Findings</span>
+</a>
+<!-- Sources -->
+<a class="text-text-secondary hover:text-text hover:bg-surface-raised px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer active:opacity-80 rounded-md" href="#">
+<span class="material-symbols-outlined text-xl">database</span>
+<span class="text-sm font-medium">Sources</span>
+</a>
+<!-- Privacy (ACTIVE) -->
+<a class="text-accent bg-surface-raised border-l-2 border-accent px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer active:opacity-80 -ml-[1px]" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="text-sm font-medium">Privacy</span>
+</a>
+<!-- Experiments -->
+<a class="text-text-secondary hover:text-text hover:bg-surface-raised px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer active:opacity-80 rounded-md" href="#">
+<span class="material-symbols-outlined text-xl">biotech</span>
+<span class="text-sm font-medium">Experiments</span>
+</a>
+</nav>
+<!-- Footer / CTA -->
+<div class="px-4 mt-auto flex flex-col gap-4">
+<!-- CTA Status Chip -->
+<div class="bg-surface-raised border border-hairline rounded px-3 py-2 flex items-center gap-2 cursor-help group">
+<div class="w-2 h-2 rounded-full bg-status-good animate-pulse"></div>
+<span class="text-xs font-mono text-text-secondary group-hover:text-text transition-colors">Local Vault: Active</span>
+</div>
+<div class="flex flex-col gap-1">
+<!-- Settings -->
+<a class="text-text-secondary hover:text-text px-4 py-2 flex items-center gap-3 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span>Settings</span>
+</a>
+<!-- Support -->
+<a class="text-text-secondary hover:text-text px-4 py-2 flex items-center gap-3 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="ml-64 h-screen flex flex-col relative bg-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-16 border-b border-hairline bg-background/90 backdrop-blur-md flex justify-between items-center px-8 z-10">
+<!-- Title -->
+<div class="flex items-center gap-4">
+<h1 class="font-headline text-text font-bold tracking-tight">Privacy &amp; egress</h1>
+<div class="h-4 w-[1px] bg-hairline"></div>
+<!-- Pills/Status -->
+<div class="flex items-center gap-2 border border-hairline rounded px-2.5 py-1 bg-surface-raised/50">
+<span class="w-1.5 h-1.5 rounded-full bg-status-good"></span>
+<span class="text-xs font-mono text-text-secondary">94% Coverage</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4 text-text-secondary">
+<button class="hover:text-text transition-colors scale-95 duration-100 p-1">
+<span class="material-symbols-outlined">sync</span>
+</button>
+<button class="hover:text-text transition-colors scale-95 duration-100 p-1 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-accent rounded-full"></span>
+</button>
+<button class="hover:text-text transition-colors scale-95 duration-100 p-1">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto pt-24 pb-12 px-8">
+<div class="max-w-6xl mx-auto space-y-6">
+<!-- Top Row: Local Vault Status & Payload Redaction -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Local Vault Status Card -->
+<div class="lg:col-span-2 border border-hairline bg-surface flex flex-col p-6 rounded-sm relative overflow-hidden group">
+<!-- Faint glow background -->
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-status-good/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-status-good/10 transition-colors duration-500"></div>
+<div class="flex items-start gap-4 z-10">
+<div class="w-10 h-10 rounded border border-status-good/30 bg-status-good/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-status-good" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<div class="space-y-1">
+<h2 class="text-lg font-headline font-semibold text-text tracking-tight">Raw observations have never left this host.</h2>
+<p class="text-sm text-text-secondary leading-relaxed">
+                                    Zero-trust host boundary active. Policy: <span class="font-mono text-xs border border-hairline bg-background px-1.5 py-0.5 rounded text-text-muted">default-deny</span>.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Payload Redaction Sidebar/Card -->
+<div class="border border-hairline bg-surface p-6 rounded-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-semibold text-text tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+                                Payload Redaction
+                            </h3>
+<!-- Toggle -->
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="redaction_toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-accent cursor-pointer" for="redaction_toggle"></label>
+</div>
+</div>
+<p class="text-xs text-text-secondary leading-relaxed">
+                            Aggressively scrub potential PII from any payload destined for an external network.
+                        </p>
+<div class="mt-auto pt-4 border-t border-hairline">
+<span class="text-[10px] font-mono text-status-good uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-status-good rounded-full block"></span> Redaction Active
+                            </span>
+</div>
+</div>
+</div>
+<!-- Middle Row: Egress Routes -->
+<div class="border border-hairline bg-surface rounded-sm overflow-hidden">
+<div class="border-b border-hairline p-4 bg-surface-raised flex items-center justify-between">
+<h2 class="text-sm font-semibold text-text flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">route</span>
+                            Egress Routes
+                        </h2>
+<span class="text-xs text-text-secondary font-mono">4 DESTINATIONS CONFIG</span>
+</div>
+<div class="divide-y divide-hairline">
+<!-- Route: Home Assistant -->
+<div class="p-4 hover:bg-surface-raised/30 transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded border border-hairline bg-background flex items-center justify-center text-text-muted group-hover:text-text transition-colors">
+<span class="material-symbols-outlined text-[18px]">home_iot_device</span>
+</div>
+<div>
+<h4 class="text-sm font-medium text-text">Home Assistant</h4>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-secondary">LAN</span>
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-secondary">DERIVED ONLY</span>
+</div>
+</div>
+</div>
+<!-- Toggle -->
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle_ha" name="toggle_ha" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-accent cursor-pointer" for="toggle_ha"></label>
+</div>
+</div>
+<!-- Route: MQTT Broker -->
+<div class="p-4 hover:bg-surface-raised/30 transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded border border-hairline bg-background flex items-center justify-center text-text-muted group-hover:text-text transition-colors">
+<span class="material-symbols-outlined text-[18px]">podcasts</span>
+</div>
+<div>
+<h4 class="text-sm font-medium text-text">MQTT Broker</h4>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-secondary">LAN</span>
+</div>
+</div>
+</div>
+<!-- Toggle -->
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle_mqtt" name="toggle_mqtt" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-accent cursor-pointer" for="toggle_mqtt"></label>
+</div>
+</div>
+<!-- Route: Local Ollama -->
+<div class="p-4 hover:bg-surface-raised/30 transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded border border-hairline bg-background flex items-center justify-center text-text-muted group-hover:text-text transition-colors">
+<span class="material-symbols-outlined text-[18px]">memory</span>
+</div>
+<div>
+<h4 class="text-sm font-medium text-text">Local Ollama Narration</h4>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-secondary">ON-DEVICE</span>
+<span class="text-[10px] font-mono border border-status-good/30 bg-status-good/5 px-1 rounded text-status-good">RAW OK</span>
+</div>
+</div>
+</div>
+<!-- Toggle -->
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle_ollama" name="toggle_ollama" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-accent cursor-pointer" for="toggle_ollama"></label>
+</div>
+</div>
+<!-- Route: Cloud LLM API -->
+<div class="p-4 hover:bg-surface-raised/30 transition-colors flex items-center justify-between group bg-surface-raised/10">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded border border-hairline bg-background flex items-center justify-center text-status-attention/70 group-hover:text-status-attention transition-colors">
+<span class="material-symbols-outlined text-[18px]">cloud_off</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="text-sm font-medium text-text-secondary">Cloud LLM API</h4>
+<span class="text-[10px] bg-status-attention/10 text-status-attention border border-status-attention/20 px-1.5 py-0.5 rounded font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">warning</span>
+                                            Requires strict PII redaction
+                                        </span>
+</div>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-muted">OPT-IN</span>
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-muted">REDACTED</span>
+<span class="text-[10px] font-mono border border-hairline bg-background px-1 rounded text-text-muted">DERIVED-ONLY</span>
+</div>
+</div>
+</div>
+<!-- Toggle (OFF) -->
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in opacity-50 cursor-not-allowed">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-raised border-4 border-hairline appearance-none cursor-not-allowed" disabled="" id="toggle_cloud" name="toggle_cloud" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-background border border-hairline cursor-not-allowed" for="toggle_cloud"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Audit Log -->
+<div class="border border-hairline bg-surface rounded-sm overflow-hidden flex flex-col h-[200px]">
+<div class="border-b border-hairline p-3 bg-surface-raised flex items-center justify-between shrink-0">
+<h2 class="text-xs font-semibold text-text uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+                            Route Audit Log
+                        </h2>
+<button class="text-xs text-accent hover:text-text transition-colors">Export .csv</button>
+</div>
+<div class="p-2 overflow-y-auto flex-1 font-mono text-[11px] leading-relaxed text-text-secondary space-y-1">
+<div class="flex gap-4 hover:bg-surface-raised/50 px-2 py-1 rounded transition-colors">
+<span class="text-text-muted shrink-0 tabular-nums">14:02:11</span>
+<span class="text-accent shrink-0 w-20">DERIVED</span>
+<span class="text-text-muted">-&gt;</span>
+<span class="truncate">local Ollama (no raw)</span>
+</div>
+<div class="flex gap-4 hover:bg-surface-raised/50 px-2 py-1 rounded transition-colors">
+<span class="text-text-muted shrink-0 tabular-nums">09:10:45</span>
+<span class="text-accent shrink-0 w-20">SUMMARY</span>
+<span class="text-text-muted">-&gt;</span>
+<span class="truncate">Home Assistant (LAN)</span>
+</div>
+<div class="flex gap-4 hover:bg-surface-raised/50 px-2 py-1 rounded transition-colors">
+<span class="text-text-muted shrink-0 tabular-nums">08:30:02</span>
+<span class="text-accent shrink-0 w-20">DELTA</span>
+<span class="text-text-muted">-&gt;</span>
+<span class="truncate">MQTT Broker (LAN)</span>
+</div>
+<div class="flex gap-4 hover:bg-surface-raised/50 px-2 py-1 rounded transition-colors opacity-50">
+<span class="text-text-muted shrink-0 tabular-nums">08:00:00</span>
+<span class="text-text-muted shrink-0 w-20">SYSTEM</span>
+<span class="text-text-muted">-</span>
+<span class="truncate">Daily egress policies loaded [4 active, 1 blocked]</span>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="text-center pt-8 pb-4">
+<p class="text-xs text-text-muted font-mono tracking-wide">
+                        Default-deny: raw observations never cross the host boundary.
+                    </p>
+</div>
+</div>
+</main>
+</div>
+</body></html>

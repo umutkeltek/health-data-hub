@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sources - HealthSave Observatory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {},
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {},
+                    fontFamily: {
+                        "headline": ["Inter", "sans-serif"],
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    fontSize: {}
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0d12;
+            color: #f4f6fb;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex bg-[#0a0d12] text-[#f4f6fb] min-h-screen antialiased">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col w-64 border-r border-[#20283a] bg-[#0a0d12] z-50">
+<div class="p-6 pb-2">
+<div class="text-lg font-bold text-[#f4f6fb] flex items-center gap-2 font-headline">
+<img alt="Indigo diamond mark" class="w-6 h-6 rounded-lg opacity-90 filter drop-shadow-[0_0_8px_rgba(110,123,255,0.12)]" src="https://lh3.googleusercontent.com/aida/AP1WRLutSHRsj2VwfB3yTrUBaIazadfMPXsxqktEYJZCwlSenjAITcZpfQCTRr1kvALMz5sxKJ3RfAGXpQKiCYITKDpASqoNkoAFktzMaHV2tQjHxL-BugcuGeJhFwgjh2DVwNgJkKkxxA6OzdkAnBBMQndTJvUJzfEstW6Ey4i3LFnOwqq_Q594tFV-x3dfhtC0a20btkjw1oaPTNGNvgxe6TMYHAXoYikfdc1Sm6VTh8doZx55oBDpdQEi7Wzn"/>
+                HealthSave<span class="text-[#9aa4b8] font-normal text-sm ml-1 mt-1">Observatory</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto scrollbar-hide py-4 space-y-1">
+<a class="flex items-center gap-3 text-[#9aa4b8] pl-4 py-2 hover:text-[#f4f6fb] hover:bg-[#10151f] transition-all duration-150 ease-in-out font-headline text-sm tracking-tight border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                Today
+            </a>
+<a class="flex items-center gap-3 text-[#9aa4b8] pl-4 py-2 hover:text-[#f4f6fb] hover:bg-[#10151f] transition-all duration-150 ease-in-out font-headline text-sm tracking-tight border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+                Findings
+            </a>
+<a class="flex items-center gap-3 text-[#f4f6fb] font-medium border-l-2 border-[#6e7bff] pl-4 py-2 bg-[#151b27] transition-all duration-150 ease-in-out font-headline text-sm tracking-tight" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">database</span>
+                Sources
+            </a>
+<a class="flex items-center gap-3 text-[#9aa4b8] pl-4 py-2 hover:text-[#f4f6fb] hover:bg-[#10151f] transition-all duration-150 ease-in-out font-headline text-sm tracking-tight border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+                Privacy
+            </a>
+<a class="flex items-center gap-3 text-[#9aa4b8] pl-4 py-2 hover:text-[#f4f6fb] hover:bg-[#10151f] transition-all duration-150 ease-in-out font-headline text-sm tracking-tight border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-[20px]">biotech</span>
+                Experiments
+            </a>
+</div>
+<div class="p-4 mt-auto border-t border-[#20283a]">
+<div class="mb-4">
+<button class="w-full bg-[#10151f] hover:bg-[#151b27] text-[#6e7bff] border border-[#20283a] py-2 px-3 rounded-md text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">taunt</span>
+                     Local Vault
+                 </button>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 text-[#9aa4b8] pl-2 py-1.5 hover:text-[#f4f6fb] hover:bg-[#10151f] transition-all duration-150 ease-in-out font-headline text-xs tracking-tight rounded-md" href="#">
+<span class="material-symbols-outlined text-[16px]">dns</span>
+                    System Status
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="h-14 w-full border-b border-[#20283a] bg-[#0a0d12]/80 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-40">
+<div class="font-display text-xs uppercase tracking-widest text-[#9aa4b8]">
+                Observatory <span class="mx-2 text-[#20283a]">/</span> <span class="text-[#f4f6fb] font-semibold">Sources</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-[#6e7bff] font-display text-xs uppercase tracking-widest flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#6e7bff] animate-pulse"></div>
+                     Coverage 94%
+                 </div>
+<div class="h-4 w-px bg-[#20283a]"></div>
+<div class="flex items-center gap-3 text-[#9aa4b8]">
+<span class="material-symbols-outlined text-[20px] hover:text-[#6e7bff] cursor-pointer transition-colors">sensors</span>
+<span class="material-symbols-outlined text-[20px] hover:text-[#6e7bff] cursor-pointer transition-colors">memory</span>
+<span class="material-symbols-outlined text-[20px] hover:text-[#6e7bff] cursor-pointer transition-colors">shield</span>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-8 lg:p-12 overflow-y-auto">
+<div class="max-w-6xl mx-auto space-y-12">
+<!-- Header -->
+<section class="max-w-3xl">
+<h1 class="text-3xl font-headline font-semibold text-[#f4f6fb] tracking-tight mb-3">Data Provenance</h1>
+<p class="text-[#9aa4b8] text-sm leading-relaxed max-w-2xl">
+                        Ingestion streams are rigidly mapped to their hardware origins. Imperfect or conflicting signals are retained as immutable records within the Local Vault. We do not synthesize artificial consensus.
+                    </p>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Left/Main Column: Active Streams -->
+<div class="lg:col-span-2 space-y-8">
+<section class="bg-[#10151f] border border-[#20283a] rounded-lg overflow-hidden">
+<div class="px-6 py-4 border-b border-[#20283a] flex items-center justify-between bg-[#151b27]/50">
+<h2 class="text-sm font-semibold text-[#f4f6fb] tracking-wide uppercase font-display">Active Streams</h2>
+<span class="text-xs text-[#9aa4b8] tabular-nums">4 Connections</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="border-b border-[#20283a] text-[#6b7480] text-xs uppercase tracking-wider font-display">
+<th class="px-6 py-3 font-medium">Source / Origin</th>
+<th class="px-6 py-3 font-medium">Hardware</th>
+<th class="px-6 py-3 font-medium">Stream ID</th>
+<th class="px-6 py-3 font-medium text-right">Last Sync</th>
+<th class="px-6 py-3 font-medium text-center w-24">Integrity</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#20283a] text-[#f4f6fb]">
+<tr class="hover:bg-[#151b27]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-medium">Apple Health</span>
+<span class="text-xs text-[#6b7480]">HealthSave iOS</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#9aa4b8]">Apple Watch S8</td>
+<td class="px-6 py-4 font-mono text-xs text-[#6b7480]">hk_7f9a2b</td>
+<td class="px-6 py-4 text-right tabular-nums text-[#9aa4b8]">2m ago</td>
+<td class="px-6 py-4">
+<div class="w-full h-1 bg-[#20283a] rounded-full overflow-hidden">
+<div class="h-full bg-[#6e7bff] w-[98%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#151b27]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-medium">Whoop</span>
+<span class="text-xs text-[#6b7480]">Direct OAuth</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#9aa4b8]">Whoop 4.0</td>
+<td class="px-6 py-4 font-mono text-xs text-[#6b7480]">wp_4c1e8d</td>
+<td class="px-6 py-4 text-right tabular-nums text-[#9aa4b8]">12m ago</td>
+<td class="px-6 py-4">
+<div class="w-full h-1 bg-[#20283a] rounded-full overflow-hidden">
+<div class="h-full bg-[#6e7bff] w-[92%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#151b27]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-medium">HealthKit Statistics</span>
+<span class="text-xs text-[#6b7480]">Background Sync</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#9aa4b8]">iPhone 14 Pro</td>
+<td class="px-6 py-4 font-mono text-xs text-[#6b7480]">hk_stat_99x</td>
+<td class="px-6 py-4 text-right tabular-nums text-[#9aa4b8]">45m ago</td>
+<td class="px-6 py-4">
+<div class="w-full h-1 bg-[#20283a] rounded-full overflow-hidden">
+<div class="h-full bg-[#6e7bff] w-[100%]"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#151b27]/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-medium">Oura Cloud</span>
+<span class="text-xs text-[#6b7480]">Webhook</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#9aa4b8]">Gen 3 Ring</td>
+<td class="px-6 py-4 font-mono text-xs text-[#6b7480]">ou_8v3n1p</td>
+<td class="px-6 py-4 text-right tabular-nums text-amber-500/80">3h ago</td>
+<td class="px-6 py-4">
+<div class="w-full h-1 bg-[#20283a] rounded-full overflow-hidden">
+<div class="h-full bg-amber-500/50 w-[75%]"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Divergence Logs -->
+<section>
+<h3 class="text-sm font-semibold text-[#f4f6fb] tracking-wide uppercase font-display mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#6e7bff] text-[18px]">compare_arrows</span>
+                                Divergence Logs
+                            </h3>
+<div class="grid gap-4">
+<!-- Divergence Item 1 -->
+<div class="bg-[#10151f] border border-[#20283a] rounded-lg p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-[#f4f6fb]">Sleep Duration <span class="text-[#6b7480] font-normal">(Last Night)</span></span>
+</div>
+<div class="flex items-center gap-4 text-xs tabular-nums text-[#9aa4b8]">
+<span class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-[#6e7bff]"></div> Apple Watch: 6h 42m</span>
+<span class="text-[#20283a]">|</span>
+<span class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-[#20283a]"></div> Whoop: 7h 18m</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-[#151b27] border border-[#20283a] text-xs font-medium text-[#9aa4b8]">Both Kept</span>
+</div>
+</div>
+<!-- Divergence Item 2 -->
+<div class="bg-[#10151f] border border-amber-500/20 rounded-lg p-5 flex flex-col gap-3 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500/30"></div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-[#f4f6fb]">Recovery Trend Alignment</span>
+<span class="material-symbols-outlined text-amber-500/80 text-[18px]">warning</span>
+</div>
+<p class="text-xs text-[#9aa4b8] leading-relaxed">
+                                        Sources disagree on current trajectory. HRV delta between Whoop and Oura exceeds the 15% variance threshold over a 3-day rolling window.
+                                    </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Widgets -->
+<div class="space-y-6">
+<!-- Coverage Architecture -->
+<div class="bg-[#10151f] border border-[#20283a] rounded-lg p-6">
+<div class="flex items-end justify-between mb-6">
+<div>
+<h4 class="text-xs font-semibold text-[#6b7480] uppercase tracking-wider font-display mb-1">Global Confidence</h4>
+<div class="text-3xl font-light tabular-nums text-[#f4f6fb]">94.2<span class="text-lg text-[#6b7480]">%</span></div>
+</div>
+<span class="material-symbols-outlined text-[#6e7bff] text-[32px] opacity-20">radar</span>
+</div>
+<div class="space-y-5">
+<div>
+<div class="flex justify-between text-xs mb-1.5">
+<span class="text-[#9aa4b8]">Heart Rate Kinetics</span>
+<span class="tabular-nums text-[#f4f6fb]">98%</span>
+</div>
+<div class="w-full h-1 bg-[#151b27] rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500/60 w-[98%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1.5">
+<span class="text-[#9aa4b8]">Activity Context</span>
+<span class="tabular-nums text-[#f4f6fb]">100%</span>
+</div>
+<div class="w-full h-1 bg-[#151b27] rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500/60 w-[100%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1.5">
+<span class="text-[#9aa4b8]">Sleep Architecture</span>
+<span class="tabular-nums text-[#f4f6fb]">85%</span>
+</div>
+<div class="w-full h-1 bg-[#151b27] rounded-full overflow-hidden">
+<div class="h-full bg-amber-500/60 w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Local Vault Info -->
+<div class="bg-[#151b27]/30 border border-[#20283a] rounded-lg p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-[#6b7480]">hard_drive</span>
+<span class="text-sm font-medium text-[#f4f6fb]">Local Vault</span>
+</div>
+<p class="text-xs text-[#6b7480] leading-relaxed">
+                                 Raw telemetry is stored securely on-device. Egress to external analysis tools requires explicit opt-in and is subject to automated redaction protocols.
+                             </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

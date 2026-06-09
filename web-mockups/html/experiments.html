@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HealthSave Observatory - Experiments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: '#0a0d12',
+              surface: '#10151f',
+              raised: '#151b27',
+              hairline: '#20283a',
+              indigo: {
+                DEFAULT: '#6e7bff',
+                glow: 'rgba(110, 123, 255, 0.12)'
+              },
+              text: {
+                primary: '#f4f6fb',
+                secondary: '#9aa4b8',
+                muted: '#6b7480'
+              },
+              status: {
+                good: '#34d399',
+                attention: '#fbbf24'
+              }
+            },
+            fontFamily: {
+              headline: ["Inter", "sans-serif"],
+              display: ["Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              label: ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0a0d12;
+        color: #f4f6fb;
+      }
+      .tabular-nums {
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+</head>
+<body class="bg-background text-text-primary antialiased min-h-screen">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col w-64 border-r border-[#20283a] bg-[#10151f] z-50 py-6 font-body text-sm tracking-tight">
+<div class="px-6 mb-8 flex flex-col gap-1 relative">
+<div class="absolute -left-2 top-0 w-8 h-8 rounded-full bg-indigo-glow blur-md pointer-events-none"></div>
+<div class="text-lg font-headline font-bold text-[#f4f6fb] flex items-center gap-2 relative z-10">
+<span class="w-2 h-2 bg-indigo rotate-45 flex-shrink-0" title="Indigo Diamond Mark"></span>
+                HealthSave Observatory
+            </div>
+<div class="text-text-muted text-xs">Private Health Node</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] px-4 py-2 mx-2 rounded flex items-center gap-3 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb]">calendar_today</span>
+                Today
+            </a>
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] px-4 py-2 mx-2 rounded flex items-center gap-3 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb]">insights</span>
+                Findings
+            </a>
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] px-4 py-2 mx-2 rounded flex items-center gap-3 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb]">database</span>
+                Sources
+            </a>
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] px-4 py-2 mx-2 rounded flex items-center gap-3 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb]">lock</span>
+                Privacy
+            </a>
+<a class="text-[#6e7bff] bg-[#151b27] border-l-2 border-[#6e7bff] px-4 py-2 ml-0 mr-2 flex items-center gap-3 transition-all duration-150 opacity-90 pl-[calc(1rem-2px)]" href="#">
+<span class="material-symbols-outlined text-[20px] text-[#6e7bff]">biotech</span>
+                Experiments
+            </a>
+</div>
+<div class="mt-auto px-6 flex flex-col gap-4">
+<div class="text-xs text-text-secondary bg-surface border border-hairline px-3 py-2 rounded flex items-center justify-between">
+<span>Local Vault: Synchronized</span>
+<span class="w-2 h-2 rounded-full bg-status-good"></span>
+</div>
+<div class="flex flex-col gap-2 border-t border-hairline pt-4">
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] flex items-center gap-3 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+                    System Status
+                </a>
+<a class="text-[#9aa4b8] hover:text-[#f4f6fb] flex items-center gap-3 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+                    Cloud Egress
+                </a>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 flex justify-between items-center px-6 z-40 bg-[#0a0d12]/80 backdrop-blur-md w-[calc(100%-16rem)] h-14 border-b border-[#20283a]">
+<div class="text-xl font-headline font-bold text-[#f4f6fb]">Experiments</div>
+<div class="flex items-center gap-6 font-display text-base font-medium">
+<button class="bg-[#151b27] hover:bg-surface border border-hairline text-indigo px-4 py-1.5 rounded text-sm flex items-center gap-2 transition-colors scale-95 duration-100">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New experiment
+            </button>
+<div class="text-[#6e7bff] text-sm hidden md:block">Coverage 94%</div>
+<div class="flex items-center gap-4 text-[#9aa4b8]">
+<button class="hover:text-[#f4f6fb] transition-colors scale-95 duration-100 flex items-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-[#f4f6fb] transition-colors scale-95 duration-100 flex items-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pl-64 pt-14 p-8 min-h-screen">
+<div class="max-w-5xl mx-auto space-y-8">
+<!-- Active Protocol -->
+<section>
+<h2 class="text-text-secondary text-xs uppercase tracking-wider font-semibold mb-3">Active Protocol</h2>
+<div class="bg-surface border border-hairline rounded-lg p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-lg font-medium text-text-primary">No caffeine after 12:00</h3>
+<p class="text-sm text-text-muted mt-1 tabular-nums">Protocol ID: EXP-92A4</p>
+</div>
+<div class="text-right">
+<div class="text-sm font-medium text-text-primary tabular-nums">Day 9 of 14</div>
+<div class="text-xs text-text-muted mt-1">Completion ETA: Oct 24</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-background h-1.5 rounded-full mb-8 overflow-hidden border border-hairline">
+<div class="bg-indigo h-full rounded-full" style="width: 64%"></div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-3 gap-6">
+<div class="border-l border-hairline pl-4">
+<div class="text-xs text-text-secondary mb-2">Sleep Latency</div>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-medium tabular-nums text-text-primary">18m</span>
+<span class="text-sm text-text-muted tabular-nums">avg</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-status-good text-xs tabular-nums">
+<span class="text-text-muted">vs</span>
+<span class="text-text-muted line-through">24m</span>
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+</div>
+</div>
+<div class="border-l border-hairline pl-4">
+<div class="text-xs text-text-secondary mb-2">HRV (ms)</div>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-medium tabular-nums text-text-primary">42</span>
+<span class="text-sm text-text-muted tabular-nums">avg</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-text-muted text-xs tabular-nums">
+<span>vs</span>
+<span>41</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<div class="border-l border-hairline pl-4">
+<div class="text-xs text-text-secondary mb-2">Resting HR (bpm)</div>
+<div class="flex items-baseline gap-2">
+<span class="text-xl font-medium tabular-nums text-text-primary">54</span>
+<span class="text-sm text-text-muted tabular-nums">avg</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-text-muted text-xs tabular-nums">
+<span>vs</span>
+<span>55</span>
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Computed Result -->
+<section>
+<h2 class="text-text-secondary text-xs uppercase tracking-wider font-semibold mb-3">Latest Computed Result</h2>
+<div class="bg-surface border border-hairline rounded-lg p-6">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex-1 border-b md:border-b-0 md:border-r border-hairline pb-6 md:pb-0 md:pr-6">
+<h3 class="text-base font-medium text-text-primary mb-4">Late-workout effect on next-day HRV</h3>
+<div class="bg-raised p-4 border border-hairline rounded text-sm mb-4">
+<span class="text-text-secondary mr-2">Finding:</span>
+<span class="text-text-primary">Sleep latency -11 min; HRV change not meaningful</span>
+</div>
+<div class="text-xs text-text-muted leading-relaxed">
+<strong class="text-text-secondary font-medium block mb-1">Disclaimer:</strong>
+                                Cannot conclude: medical diagnosis or broad causality. Findings represent single-subject localized variance only.
+                            </div>
+</div>
+<div class="w-full md:w-64 flex flex-col gap-4 justify-center">
+<div>
+<div class="text-xs text-text-secondary mb-1">Rigor</div>
+<div class="flex items-center gap-2 text-sm">
+<span class="w-2 h-2 rounded-full bg-status-attention flex-shrink-0"></span>
+<span class="text-text-primary">Confidence: Low-Medium</span>
+</div>
+</div>
+<div>
+<div class="text-xs text-text-secondary mb-1">Data Quality</div>
+<div class="flex items-center gap-2 text-sm tabular-nums">
+<span class="w-2 h-2 rounded-full bg-status-good flex-shrink-0"></span>
+<span class="text-text-primary">Coverage: 91%</span>
+</div>
+</div>
+<div>
+<div class="text-xs text-text-secondary mb-1">Limitations Identified</div>
+<div class="text-xs text-text-muted border-l-2 border-hairline pl-2 py-1">
+                                    Travel days + missing Oura data (2 nights)
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Past Experiments Log -->
+<section>
+<h2 class="text-text-secondary text-xs uppercase tracking-wider font-semibold mb-3">Past Experiments Log</h2>
+<div class="bg-surface border border-hairline rounded-lg overflow-hidden">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-raised text-text-secondary border-b border-hairline">
+<tr>
+<th class="px-6 py-3 font-medium">Protocol</th>
+<th class="px-6 py-3 font-medium">Duration</th>
+<th class="px-6 py-3 font-medium">Primary Delta</th>
+<th class="px-6 py-3 font-medium">Confidence</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-hairline">
+<tr class="hover:bg-raised transition-colors">
+<td class="px-6 py-4 text-text-primary">Magnesium Glycinate 400mg</td>
+<td class="px-6 py-4 text-text-muted tabular-nums">30 days</td>
+<td class="px-6 py-4 tabular-nums">
+<span class="text-status-good">Deep sleep +8%</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-sm border border-hairline bg-background text-xs text-text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-status-good"></span> High
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-raised transition-colors">
+<td class="px-6 py-4 text-text-primary">Morning Sunlight Exposure</td>
+<td class="px-6 py-4 text-text-muted tabular-nums">14 days</td>
+<td class="px-6 py-4 tabular-nums">
+<span class="text-status-good">Sleep onset -15m</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-sm border border-hairline bg-background text-xs text-text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-status-good"></span> High
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-raised transition-colors">
+<td class="px-6 py-4 text-text-primary">Cold Plunge (3 min)</td>
+<td class="px-6 py-4 text-text-muted tabular-nums">21 days</td>
+<td class="px-6 py-4 tabular-nums text-text-muted">
+                                    Null effect observed
+                                </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-sm border border-hairline bg-background text-xs text-text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-status-attention"></span> Medium
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+</body></html>

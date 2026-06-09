@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Findings Feed - HealthSave Observatory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {},
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {},
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    fontSize: {}
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0d12;
+            color: #f4f6fb;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #20283a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7480;
+        }
+        .tabular-nums-custom {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r border-[#20283a] bg-[#0a0d12] py-6 px-4 z-20 flex-shrink-0">
+<!-- Header -->
+<div class="mb-8 px-2">
+<div class="text-lg font-bold tracking-tight text-[#f4f6fb] flex items-center gap-2 mb-1">
+<!-- Placeholder for Logo/Mark (Diamond/Aperture) -->
+<div class="relative w-5 h-5 flex items-center justify-center">
+<div class="absolute inset-0 bg-[#6e7bff] opacity-10 rounded-sm blur-[2px]"></div>
+<svg class="text-[#6e7bff] z-10" fill="none" height="12" viewbox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L22 12L12 22L2 12L12 2Z" stroke="currentColor" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+                HealthSave Observatory
+            </div>
+<div class="text-xs text-[#9aa4b8] ml-7">Private Health Infrastructure</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb] transition-colors" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Today</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#6e7bff] bg-[#10151f] font-medium border-r-2 border-[#6e7bff] opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-sm">Findings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb] transition-colors" data-icon="database">database</span>
+<span class="text-sm font-medium">Sources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb] transition-colors" data-icon="security">security</span>
+<span class="text-sm font-medium">Privacy</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-[#f4f6fb] transition-colors" data-icon="science">science</span>
+<span class="text-sm font-medium">Experiments</span>
+</a>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto space-y-4 pt-4 border-t border-[#20283a]">
+<div class="px-2">
+<div class="inline-flex items-center gap-2 px-2.5 py-1.5 rounded bg-[#151b27] border border-[#20283a] text-xs text-[#9aa4b8] w-full">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500/80"></div>
+<span class="truncate">Local Vault: Egress Redacted</span>
+</div>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="dns">dns</span>
+<span class="text-sm">System Status</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-[#9aa4b8] hover:text-[#f4f6fb] hover:bg-[#151b27] transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="menu_book">menu_book</span>
+<span class="text-sm">Documentation</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-[#0a0d12]">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-8 bg-[#0a0d12]/80 backdrop-blur-md border-b border-[#20283a] docked full-width top-0 z-10">
+<div class="text-xl font-headline font-semibold text-[#f4f6fb] hidden md:block">
+<!-- Mobile Only Title fallback if sidebar hidden, but layout says fixed sidebar -->
+</div>
+<div class="flex items-center gap-6 ml-auto">
+<div class="text-sm font-medium text-[#f4f6fb] tabular-nums-custom hidden sm:block">
+                    Coverage <span class="text-[#6e7bff]">94%</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#9aa4b8] hover:text-[#f4f6fb] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#9aa4b8] hover:text-[#f4f6fb] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-4 sm:p-8">
+<div class="max-w-4xl mx-auto">
+<!-- Page Header -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-[#f4f6fb] tracking-tight mb-2">Findings</h1>
+<p class="text-[15px] text-[#9aa4b8]">Evidence-linked, not advice.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-3 mb-8">
+<button class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#10151f] border border-[#20283a] rounded-md text-sm text-[#f4f6fb] hover:bg-[#151b27] transition-colors">
+                        Time Range: <span class="text-[#9aa4b8]">30 Days</span>
+<span class="material-symbols-outlined text-[16px] text-[#6b7480]" data-icon="expand_more">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#10151f] border border-[#20283a] rounded-md text-sm text-[#f4f6fb] hover:bg-[#151b27] transition-colors">
+                        Metric: <span class="text-[#9aa4b8]">All Signals</span>
+<span class="material-symbols-outlined text-[16px] text-[#6b7480]" data-icon="expand_more">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#10151f] border border-[#20283a] rounded-md text-sm text-[#f4f6fb] hover:bg-[#151b27] transition-colors">
+                        Confidence: <span class="text-[#9aa4b8]">Medium &amp; High</span>
+<span class="material-symbols-outlined text-[16px] text-[#6b7480]" data-icon="expand_more">expand_more</span>
+</button>
+<div class="ml-auto">
+<button class="text-sm text-[#9aa4b8] hover:text-[#f4f6fb] transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="sort">sort</span> Sort by Impact
+                        </button>
+</div>
+</div>
+<!-- Findings Feed (Stack) -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-[#10151f] border border-[#20283a] rounded-lg p-5 flex flex-col gap-4 hover:border-[#6e7bff]/30 transition-colors">
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h2 class="text-[16px] font-semibold text-[#f4f6fb] leading-snug">Resting HR elevated 3 nights</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-[#6e7bff]/10 text-[#6e7bff] border border-[#6e7bff]/20">
+                                        Medium Confidence
+                                    </span>
+</div>
+<p class="text-sm text-[#f4f6fb] mb-4">Evidence: RHR <span class="text-amber-400 tabular-nums-custom">+7 bpm</span> vs 60-day baseline</p>
+<div class="flex flex-wrap items-center gap-2">
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Baseline: <span class="text-[#f4f6fb]">60d</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Effect: <span class="text-[#f4f6fb]">+7bpm</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Coverage: <span class="text-[#f4f6fb]">96%</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] flex items-center gap-1">
+                                        Sources: <span class="text-[#f4f6fb]">Apple Watch, Whoop</span>
+</div>
+</div>
+</div>
+<!-- Minimalist Sparkline placeholder -->
+<div class="w-24 h-12 flex-shrink-0 opacity-80 flex items-end relative">
+<!-- Simulated trend line using SVG -->
+<svg class="w-full h-full stroke-[#6e7bff] fill-none stroke-[2]" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,35 L20,32 L40,30 L60,15 L80,5 L100,2" stroke-linecap="round" stroke-linejoin="round"></path>
+<!-- Dashed baseline -->
+<line stroke="#20283a" stroke-dasharray="2 2" stroke-width="1" x1="0" x2="100" y1="30" y2="30"></line>
+</svg>
+</div>
+</div>
+<div class="pt-3 border-t border-[#20283a]/50 mt-1">
+<p class="text-[11px] text-[#6b7480] uppercase tracking-wider font-medium">Cannot conclude: medical diagnosis or causality.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#10151f] border border-[#20283a] rounded-lg p-5 flex flex-col gap-4 hover:border-[#6e7bff]/30 transition-colors">
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h2 class="text-[16px] font-semibold text-[#f4f6fb] leading-snug">HRV trending down 4 days</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-[#6e7bff]/10 text-[#6e7bff] border border-[#6e7bff]/20">
+                                        Medium Confidence
+                                    </span>
+</div>
+<p class="text-sm text-[#f4f6fb] mb-4">Evidence: HRV <span class="text-amber-400 tabular-nums-custom">-12%</span> vs 30-day baseline</p>
+<div class="flex flex-wrap items-center gap-2">
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Baseline: <span class="text-[#f4f6fb]">30d</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Effect: <span class="text-[#f4f6fb]">-12%</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Coverage: <span class="text-[#f4f6fb]">88%</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] flex items-center gap-1">
+                                        Sources: <span class="text-[#f4f6fb]">Oura Ring</span>
+</div>
+</div>
+</div>
+<div class="w-24 h-12 flex-shrink-0 opacity-80 flex items-end relative">
+<svg class="w-full h-full stroke-[#6e7bff] fill-none stroke-[2]" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,5 L20,10 L40,15 L60,25 L80,35 L100,38" stroke-linecap="round" stroke-linejoin="round"></path>
+<line stroke="#20283a" stroke-dasharray="2 2" stroke-width="1" x1="0" x2="100" y1="15" y2="15"></line>
+</svg>
+</div>
+</div>
+<div class="pt-3 border-t border-[#20283a]/50 mt-1">
+<p class="text-[11px] text-[#6b7480] uppercase tracking-wider font-medium">Cannot conclude: medical diagnosis or causality.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#10151f] border border-[#20283a] rounded-lg p-5 flex flex-col gap-4 hover:border-[#6e7bff]/30 transition-colors">
+<div class="flex justify-between items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h2 class="text-[16px] font-semibold text-[#f4f6fb] leading-snug">Sleep latency shorter on no-caffeine days</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-[#20283a] text-[#9aa4b8] border border-[#20283a]">
+                                        Low Confidence
+                                    </span>
+</div>
+<p class="text-sm text-[#f4f6fb] mb-4">Evidence: Latency <span class="text-emerald-400 tabular-nums-custom">-11 min</span> vs caffeine days</p>
+<div class="flex flex-wrap items-center gap-2">
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Baseline: <span class="text-[#f4f6fb]">90d Event Log</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Effect: <span class="text-[#f4f6fb]">-11min</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] tabular-nums-custom">
+                                        Coverage: <span class="text-[#f4f6fb]">71%</span>
+</div>
+<div class="px-2 py-1 bg-[#0a0d12] border border-[#20283a] rounded text-[11px] text-[#9aa4b8] flex items-center gap-1">
+                                        Sources: <span class="text-[#f4f6fb]">Apple Watch, Manual Input</span>
+</div>
+</div>
+</div>
+<div class="w-24 h-12 flex-shrink-0 opacity-80 flex items-end relative">
+<!-- Scatter plot style abstract visualization -->
+<svg class="w-full h-full fill-[#6e7bff]" preserveaspectratio="none" viewbox="0 0 100 40">
+<circle cx="10" cy="15" fill-opacity="0.5" r="2"></circle>
+<circle cx="25" cy="12" fill-opacity="0.5" r="2"></circle>
+<circle cx="40" cy="30" r="2"></circle> <!-- highlighted 'no caffeine' -->
+<circle cx="55" cy="18" fill-opacity="0.5" r="2"></circle>
+<circle cx="70" cy="35" r="2"></circle> <!-- highlighted 'no caffeine' -->
+<circle cx="85" cy="14" fill-opacity="0.5" r="2"></circle>
+<line class="stroke-[#20283a] fill-none" stroke="#20283a" stroke-dasharray="2 2" stroke-width="1" x1="0" x2="100" y1="20" y2="20"></line>
+</svg>
+</div>
+</div>
+<div class="pt-3 border-t border-[#20283a]/50 mt-1">
+<p class="text-[11px] text-[#6b7480] uppercase tracking-wider font-medium">Cannot conclude: medical diagnosis or causality.</p>
+</div>
+</div>
+</div>
+<!-- Footer spacing -->
+<div class="h-16"></div>
+</div>
+</main>
+</div>
+</body></html>
